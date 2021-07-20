@@ -35,16 +35,15 @@ class DB {
   }
 
   getAll(table, callback = console.log) {
+    let data = [];
     let objectStore = this.db.transaction(table).objectStore(table);
-
     objectStore.openCursor().onsuccess = event => {
       let cursor = event.target.result;
-
       if (cursor) {
-        callback({...cursor.value});
+        data.push({...cursor.value});
         cursor.continue();
       } else {
-        console.log(`Getting all rows from table ${table} completed.`);
+        callback(data);
       }
     };
   }
