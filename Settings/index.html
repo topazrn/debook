@@ -6,10 +6,34 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings - Debook</title>
+  <link rel="stylesheet" href="../global.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
+  <nav>
+    <h1>Debook</h1>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li><a href="./">People</a></li>
+      <li><a href="./">Debts</a></li>
+      <li class="active"><a href="./">Settings</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section class="card database">
+      <h3>Manage Database</h3>
+      <ul>
+        <li><button>Download database backup</button></li>
+        <li><button>Restore database backup</button></li>
+        <li><button>Fill database with example data</button></li>
+        <li><button>Clear database</button></li>
+      </ul>
+    </section>
+  </main>
   <script src="../global.js"></script>
 </body>
 
