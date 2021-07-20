@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Debook</title>
+  <link rel="stylesheet" href="../global.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <main>
+    <section class="card register">
+      <h3>Create an account</h3>
+      <form onsubmit="submits(event)">
+        <label for="email">Email</label><br>
+        <input type="email" name="email" id="email" required><br><br>
+        <label for="password">Password</label><br>
+        <input type="password" name="password" id="password" required><br><br>
+        <label for="confirm_password">Confirm Password</label><br>
+        <input type="password" name="confirm_password" id="confirm_password" required><br><br>
+        <input type="checkbox" name="eula" id="eula" required>
+        <label for="eula">I agree to the terms and conditions.</label><br><br>
+        <button type="submit">Continue</button>
+      </form>
+    </section>
+  </main>
+  <script src="../global.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

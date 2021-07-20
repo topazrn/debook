@@ -3,6 +3,7 @@
     {
       "id": "topaz@gmail.com:asdf",
       "logged_in": false,
+      "aggree_to_eula": true,
       "has_done_tutorial": false
     }
   ],
