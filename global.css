@@ -47,6 +47,8 @@ nav>ul>li.active {
 }
 
 main {
+  display: flex;
+  flex-wrap: wrap;
   background-color: #36393F;
   height: 100%;
   width: 100%;
@@ -129,6 +131,7 @@ td:last-child {
   }
 
   main {
+    display: unset;
     height: 100%;
     width: 100%;
   }
