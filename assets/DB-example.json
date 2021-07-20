@@ -1,0 +1,30 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "topaz@gmail.com",
+      "password": "asdf",
+      "active": false
+    }
+  ],
+  "persons":[
+    {
+      "id": "1",
+      "user_id": "1",
+      "email": "abah@gmail.com",
+      "phone": "081112341234",
+      "name": "Abah"
+    }
+  ],
+  "debts":[
+    {
+      "id": "1",
+      "person_id": "1",
+      "yours": false,
+      "amount": 239600,
+      "description": "Beli kolam ikan",
+      "date": "schema",
+      "due_date": "schema"
+    }
+  ]
+}
