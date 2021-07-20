@@ -7,9 +7,13 @@ body {
   font-family: 'Comfortaa';
 }
 
+a {
+  text-decoration: unset;
+  color: unset;
+}
+
 nav {
   background-color: #202225;
-  height: 100%;
   padding: 1rem;
 }
 
@@ -22,12 +26,10 @@ nav>h1{
 nav>ul {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-evenly; */
   list-style: none;
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 100%;
 }
 
 nav>ul>li {
@@ -51,7 +53,6 @@ main {
   }
 
   nav {
-    height: unset;
     width: 100%;
     padding: 0.5rem 0;
   }
