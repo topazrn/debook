@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Debook</title>
-  <link rel="stylesheet" href="global.css"><link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <nav>
     <h1>Debook</h1>
@@ -20,13 +24,46 @@
     </ul>
   </nav>
   <main>
+    <section class="card summary">
+      <h3>Summary</h3>
+      <div class="summary-item">
+        <div class="icon">+</div>
+        <div class="progress-container-container">
+          <div class="progress-container">
+            <div class="progress"></div>
+          </div>
+          <span class="progress-title">Other's Debt</span>
+        </div>
+        <div class="progress-percentage">79%</div>
+      </div>
+      <div class="summary-item">
+        <div class="icon">-</div>
+        <div class="progress-container-container">
+          <div class="progress-container">
+            <div class="progress"></div>
+          </div>
+          <span class="progress-title">Your Debt</span>
+        </div>
+        <div class="progress-percentage">21%</div>
+      </div>
+      <div class="summary-item">
+        <div class="icon">=</div>
+        <div class="progress-container-container">
+          <div class="progress-container">
+            <div class="progress"></div>
+          </div>
+          <span class="progress-title">Balance</span>
+        </div>
+        <div class="progress-percentage">58%</div>
+      </div>
+    </section>
     <section class="card">
-      <h3>Debt history</h3>
+      <h3>History</h3>
       <div class="table">
         <table>
           <thead>
             <tr>
-              <th>Creditor → Debtor</th> 
+              <th>Creditor → Debtor</th>
               <th>Description</th>
               <th>Date</th>
               <th>Amount</th>
@@ -60,8 +97,11 @@
           </tbody>
         </table>
       </div>
-      <a href=""><h4>Older...</h4></a>
+      <a href="">
+        <h4>Older...</h4>
+      </a>
     </section>
   </main>
 </body>
+
 </html>
