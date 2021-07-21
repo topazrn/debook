@@ -160,8 +160,8 @@ function addDebt() {
 }
 
 function renderDebts() {
-  let personsContainer = document.querySelector(".card.debts tbody");
-  personsContainer.innerHTML = "";
+  let debtsContainer = document.querySelector(".card.debts tbody");
+  debtsContainer.innerHTML = "";
   let templateDebt = document.querySelectorAll("template")[0].content.querySelector("tr");
   let number = 0;
   for (let personIndex = 0; personIndex < user.persons.length; personIndex++) {
@@ -185,7 +185,7 @@ function renderDebts() {
       deleteButton.onclick = () => {
         deleteDebt(personIndex, debtIndex);
       };
-      personsContainer.appendChild(cloneTemplateDebt);
+      debtsContainer.appendChild(cloneTemplateDebt);
     }
   }
 }
