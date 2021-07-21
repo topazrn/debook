@@ -76,7 +76,7 @@ function renderHistory() {
     return 0;
   });
   let number = 0;
-  for (let index = 0; index < debts.length; index++) {
+  for (let index = 0; index < debts.length && index < 10; index++) {
     const debt = debts[index];
     let cloneTemplateDebt = document.importNode(templateDebt, true);
     let tds = cloneTemplateDebt.querySelectorAll("td");
