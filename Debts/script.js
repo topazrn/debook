@@ -181,7 +181,7 @@ function renderDebts() {
       name.innerText = person.name;
       description.innerText = debt.description;
       date.innerText = (new Date(debt.date)).toLocaleDateString("ID-id");
-      amount.innerText = debt.amount;
+      amount.innerText = toRupiah(debt.amount);
       deleteButton.onclick = () => {
         deleteDebt(personIndex, debtIndex);
       };
