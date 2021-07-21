@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>People - Debook</title>
+  <link rel="stylesheet" href="../global.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav>
+    <h1>Debook</h1>
+    <ul>
+      <li><a href="../index.html">Overview</a></li>
+      <li class="active"><a href="./index.html">People</a></li>
+      <li><a href="./">Debts</a></li>
+      <li><a href="../Settings/index.html">Settings</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section class="card people">
+      <h3>Manage People</h3>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Action</th>
+            </tr>
+            <tr>
+              <th>Search</th>
+              <th><input type="text" name="search-name" id="search-name" placeholder="Search Name"></th>
+              <th><input type="text" name="search-email" id="search-email" placeholder="Search Email"></th>
+              <th><input type="text" name="search-phone" id="search-phone" placeholder="Search Phone"></th>
+              <th><button onclick="searchPerson()">Search</button></th>
+            </tr>
+            <tr>
+              <th>Add</th>
+              <th><input type="text" name="add-name" id="add-name" placeholder="Name" required></th>
+              <th><input type="email" name="add-email" id="add-email" placeholder="Email" required></th>
+              <th><input type="text" name="add-phone" id="add-phone" placeholder="Phone" required></th>
+              <th><button onclick="addPerson()">Add new</button></th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <h4>Loading...</h4>
+    </section>
+  </main>
+  <template>
+    <tr>
+      <!-- 0 No -->
+      <td></td>
+      <!-- 1 Name -->
+      <td></td>
+      <!-- 2 Email -->
+      <td></td>
+      <!-- 3 Phone -->
+      <td></td>
+      <!-- 4 Delete -->
+      <td><button>Delete</button></td>
+    </tr>
+  </template>
+  <script src="../global.js"></script>
+  <script src="../validation.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

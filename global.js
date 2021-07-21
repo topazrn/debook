@@ -1,4 +1,6 @@
 let db;
+let user;
+
 let consoleStyles = {
   success: "background-color: green; color: white",
   fail: "background-color: red; color: white",
@@ -7,6 +9,14 @@ let consoleStyles = {
 document.addEventListener('DOMContentLoaded', function () {
   db = new DB();
 });
+
+function hide(elem) {
+    elem.style.display = 'none';
+}
+
+function show(elem) {
+    elem.style.display = 'block';
+}
 
 function toRupiah(_int) {
   _int = parseInt(_int);
@@ -31,7 +41,7 @@ function authCheck() {
   db.getAll("users", users => {
     let logged_in = false;
     for (let index = 0; index < users.length; index++) {
-      const user = users[index];
+      user = users[index];
       if (user.logged_in) {
         logged_in = true;
         break;
@@ -39,6 +49,7 @@ function authCheck() {
     }
     if (logged_in) {
       if (!requiresLogin()) window.location.href = getHomeUrl();
+
     } else {
       if (requiresLogin()) window.location.href = getHomeUrl() + "/Login/index.html";
     }
@@ -160,27 +171,22 @@ class DB {
   }
 
   constructor() {
-    this.getExampleData((data) => {
-      let request = window.indexedDB.open("mydb", 1);
+    let request = window.indexedDB.open("mydb", 1);
 
-      request.onsuccess = event => {
-        this.db = request.result;
-        console.log("%c Connected to IndexedDB: " + this.db, consoleStyles.success);
-        authCheck();
-      };
+    request.onsuccess = event => {
+      this.db = request.result;
+      console.log("%c Connected to IndexedDB: " + this.db, consoleStyles.success);
+      authCheck();
+    };
 
-      request.onerror = event => {
-        console.log("%c Error connecting to IndexedDB: ", consoleStyles.fail);
-      };
+    request.onerror = event => {
+      console.log("%c Error connecting to IndexedDB: ", consoleStyles.fail);
+    };
 
-      request.onupgradeneeded = event => {
-        this.db = event.target.result;
-        console.log("%c Upgrading IndexedDB: " + this.db, consoleStyles.success);
-        Object.keys(data).forEach(table => {
-          this.db.createObjectStore(table, { keyPath: "id" });
-        })
-      }
-
-    });
+    request.onupgradeneeded = event => {
+      this.db = event.target.result;
+      console.log("%c Upgrading IndexedDB: " + this.db, consoleStyles.success);
+      this.db.createObjectStore("users", { keyPath: "id" });
+    }
   }
 }

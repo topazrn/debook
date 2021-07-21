@@ -1,37 +1,16 @@
-{
-  "users": [
-    {
-      "id": "topaz@gmail.com:asdf",
-      "logged_in": false,
-      "aggree_to_eula": true,
-      "has_done_tutorial": false
-    }
-  ],
-  "persons": [
-    {
-      "id": "topaz@gmail.com:asdf",
-      "persons": [
-        {
-          "user_id": "1",
-          "email": "abah@gmail.com",
-          "phone": "081112341234",
-          "name": "Abah"
-        }
-      ]
-    }
-  ],
-  "debts": [
-    {
-      "id": "topaz@gmail.com:asdf",
-      "debts": [
-        {
-          "yours": false,
-          "amount": 239600,
-          "description": "Beli kolam ikan",
-          "date": 1626788804949,
-          "due_date": 1636788804949
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "email": "abah@gmail.com",
+    "phone": "081112341234",
+    "name": "Abah",
+    "debts": [
+      {
+        "yours": false,
+        "amount": 239600,
+        "description": "Beli kolam ikan",
+        "date": 1626788804949,
+        "due_date": 1636788804949
+      }
+    ]
+  }
+]

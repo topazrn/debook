@@ -31,6 +31,14 @@ function validate(email, password, confirm_password, eula) {
     alert("Email must be filled.");
     return false;
   }
+  if (email.indexOf("@") == -1) {
+      alert(`Email must contain "@".`);
+      return false;
+  }
+  if (!email.endsWith(".com")) {
+      alert(`Email must ends with ".com".`);
+      return false;
+  }
 
   // Password
   if (password === "") {
@@ -98,7 +106,8 @@ function addUser(email, password, eula) {
     "id": `${email}:${password}`,
     "logged_in": true,
     "aggree_to_eula": eula,
-    "has_done_tutorial": false
+    "has_done_tutorial": false,
+    "persons": [],
   }, () => {
     window.location.href = getHomeUrl();
   });
