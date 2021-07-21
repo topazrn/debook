@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function hide(elem) {
-    elem.style.display = 'none';
+  elem.style.display = 'none';
 }
 
 function show(elem) {
-    elem.style.display = 'block';
+  elem.style.display = 'block';
 }
 
 function toRupiah(_int) {
@@ -38,7 +38,7 @@ function getCurrentUrlWithoutQueryString() {
 }
 
 function authCheck() {
-  db.getAll("users", users => {
+  db.getAll(users => {
     let logged_in = false;
     for (let index = 0; index < users.length; index++) {
       user = users[index];
@@ -72,19 +72,10 @@ function authCheck() {
 }
 
 function logout() {
-  db.getAll("users", users => {
-    let logged_in = false;
-    let user;
-    for (let index = 0; index < users.length; index++) {
-      user = users[index];
-      if (user.logged_in) {
-        logged_in = true;
-        break;
-      }
-    }
-    if (logged_in) {
+  db.getAll(users => {
+    if (user.logged_in) {
       user.logged_in = false;
-      db.update("users", user.id, user, () => {
+      db.update(user.id, user, () => {
         authCheck();
       });
     } else {
@@ -94,9 +85,9 @@ function logout() {
 }
 
 class DB {
-  get(table, id, callback = console.log) {
-    let transaction = this.db.transaction([table]);
-    let objectStore = transaction.objectStore(table);
+  get(id, callback = console.log) {
+    let transaction = this.db.transaction([this.table]);
+    let objectStore = transaction.objectStore(this.table);
     let request = objectStore.get(id);
 
     request.onerror = event => {
@@ -108,9 +99,9 @@ class DB {
     };
   }
 
-  getAll(table, callback = console.log) {
+  getAll(callback = console.log) {
     let data = [];
-    let objectStore = this.db.transaction(table).objectStore(table);
+    let objectStore = this.db.transaction(this.table).objectStore(this.table);
     objectStore.openCursor().onsuccess = event => {
       let cursor = event.target.result;
       if (cursor) {
@@ -122,46 +113,44 @@ class DB {
     };
   }
 
-  insert(table, data, callback) {
-    let request = this.db.transaction([table], "readwrite")
-      .objectStore(table)
+  insert(data, callback) {
+    let request = this.db.transaction([this.table], "readwrite")
+      .objectStore(this.table)
       .add(data)
 
     request.onsuccess = event => {
-      console.log(`%c Insert data to table ${table} successful.`, consoleStyles.success);
+      console.log(`%c Insert data to table ${this.table} successful.`, consoleStyles.success);
       callback()
     };
 
     request.onerror = event => {
-      console.log(`%c Insert data to table ${table} unsuccessful.`, consoleStyles.fail);
+      console.log(`%c Insert data to table ${this.table} unsuccessful.`, consoleStyles.fail);
     }
   }
 
-  update(table, id, data, callback) {
-    this.delete(table, id, () => {
-      this.insert(table, data, callback);
+  update(id, data, callback) {
+    this.delete(id, () => {
+      this.insert(data, callback);
     });
   }
 
-  delete(table, id, callback) {
-    let request = this.db.transaction([table], "readwrite")
-      .objectStore(table)
+  delete(id, callback) {
+    let request = this.db.transaction([this.table], "readwrite")
+      .objectStore(this.table)
       .delete(id);
 
     request.onsuccess = event => {
-      console.log(`%c Delete data from table ${table} successful.`, consoleStyles.success);
+      console.log(`%c Delete data from table ${this.table} successful.`, consoleStyles.success);
       callback();
     };
   }
 
   import(data) {
-    Object.keys(data).forEach(table => {
-      data[table].forEach(row => {
-        this.db.transaction([table], "readwrite")
-          .objectStore(table)
-          .add(row)
-      });
-    })
+    data.forEach(row => {
+      this.db.transaction(["users"], "readwrite")
+        .objectStore("users")
+        .add(row)
+    });
   }
 
   getExampleData(callback) {
@@ -171,6 +160,7 @@ class DB {
   }
 
   constructor() {
+    this.table = "users";
     let request = window.indexedDB.open("mydb", 1);
 
     request.onsuccess = event => {
@@ -186,7 +176,7 @@ class DB {
     request.onupgradeneeded = event => {
       this.db = event.target.result;
       console.log("%c Upgrading IndexedDB: " + this.db, consoleStyles.success);
-      this.db.createObjectStore("users", { keyPath: "id" });
+      this.db.createObjectStore(this.table, { keyPath: "id" });
     }
   }
 }

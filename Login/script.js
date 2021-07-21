@@ -80,7 +80,7 @@ function login(email, password) {
     console.log(user != undefined);
     if (user != undefined) {
       user.logged_in = true;
-      db.update("users", user.id, user, () => {
+      db.update(user.id, user, () => {
         authCheck();
       });
     } else {

@@ -7,7 +7,7 @@ function deletePerson(email) {
     const person = user.persons[index];
     if (person.email === email) {
       user.persons.splice(index, 1);
-      db.update("users", user.id, user, () => {
+      db.update(user.id, user, () => {
         renderPersons();
       });
       break;
@@ -33,7 +33,7 @@ function addPerson() {
       name: name.value,
       debts: [],
     });
-    db.update("users", user.id, user, () => {
+    db.update(user.id, user, () => {
       email.value = "";
       phone.value = "";
       name.value = "";
