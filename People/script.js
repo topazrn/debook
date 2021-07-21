@@ -16,25 +16,32 @@ function deletePerson(email) {
 }
 
 function addPerson() {
-  let name = document.querySelector("#add-name").value;
-  let email = document.querySelector("#add-email").value;
-  let phone = document.querySelector("#add-phone").value;
+  let name = document.querySelector("#add-name");
+  let email = document.querySelector("#add-email");
+  let phone = document.querySelector("#add-phone");
 
-  let valid = validate();
+  let valid = validate(
+    name.value,
+    email.value,
+    phone.value,
+  );
 
   if (valid) {
     user.persons.push({
-      email,
-      phone,
-      name,
+      email: email.value,
+      phone: phone.value,
+      name: name.value,
       debts: [],
     });
     db.update("users", user.id, user, () => {
+      email.value = "";
+      phone.value = "";
+      name.value = "";
       renderPersons();
     });
   };
 
-  function validate() {
+  function validate(name, email, phone) {
     // Name
     if (name === "") {
       alert("Name must be filled.");
@@ -84,7 +91,7 @@ function renderPersons() {
   setTimeout(() => {
     _renderPersons();
     hide(document.querySelector(".card h4"));
-  }, 1000);
+  }, 100);
 }
 
 function _renderPersons() {
