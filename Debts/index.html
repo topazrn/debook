@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>People - Debook</title>
+  <title>Debts - Debook</title>
   <link rel="stylesheet" href="../global.css">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,37 +18,43 @@
     <h1>Debook</h1>
     <ul>
       <li><a href="../index.html">Overview</a></li>
-      <li class="active"><a href="./index.html">People</a></li>
-      <li><a href="../Debts/index.html">Debts</a></li>
+      <li><a href="../People/index.html">People</a></li>
+      <li class="active"><a href="./index.html">Debts</a></li>
       <li><a href="../Settings/index.html">Settings</a></li>
     </ul>
   </nav>
   <main>
-    <section class="card people">
-      <h3>Manage People</h3>
+    <section class="card debts">
+      <h3>Manage Debts</h3>
       <div class="table">
         <table>
           <thead>
             <tr>
               <th>No</th>
               <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
+              <th>Description</th>
+              <th>Date</th>
+              <th>Amount</th>
               <th>Action</th>
             </tr>
             <tr>
               <th>Search</th>
               <th><input type="text" name="search-name" id="search-name" placeholder="Search Name"></th>
-              <th><input type="text" name="search-email" id="search-email" placeholder="Search Email"></th>
-              <th><input type="text" name="search-phone" id="search-phone" placeholder="Search Phone"></th>
-              <th><button onclick="searchPerson()">Search</button></th>
+              <th><input type="text" name="search-description" id="search-description" placeholder="Search description"></th>
+              <th><input type="date" name="search-date" id="search-date" placeholder="Search Date"></th>
+              <th></th>
+              <th><button onclick="searchDebt()">Search</button></th>
             </tr>
             <tr>
               <th>Add</th>
-              <th><input type="text" name="add-name" id="add-name" placeholder="Name" required></th>
-              <th><input type="email" name="add-email" id="add-email" placeholder="Email" required></th>
-              <th><input type="text" name="add-phone" id="add-phone" placeholder="Phone" required></th>
-              <th><button onclick="addPerson()">Add new</button></th>
+              <th>
+                <input list="datalist-add-email" type="text" name="add-email" id="add-email" placeholder="Email" required>
+                <datalist id="datalist-add-email"></datalist>
+              </th>
+              <th><input type="text" name="add-description" id="add-description" placeholder="Description" required></th>
+              <th><input type="date" name="add-date" id="add-date" placeholder="Date" required></th>
+              <th><input type="number" name="add-amount" id="add-amount" placeholder="Amount" required></th>
+              <th><button onclick="addDebt()">Add new</button></th>
             </tr>
           </thead>
           <tbody>
@@ -63,11 +69,13 @@
       <td></td>
       <!-- 1 Name -->
       <td></td>
-      <!-- 2 Email -->
+      <!-- 2 Description -->
       <td></td>
-      <!-- 3 Phone -->
+      <!-- 3 Date -->
       <td></td>
-      <!-- 4 Delete -->
+      <!-- 4 Amount -->
+      <td></td>
+      <!-- 5 Delete -->
       <td><button>Delete</button></td>
     </tr>
   </template>

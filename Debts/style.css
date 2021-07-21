@@ -1,0 +1,16 @@
+.card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card input[type=number],
+.card input[type=date],
+.card input[type=text],
+.card input[type=email] {
+  height: 1.5rem;
+}
+
+.card button {
+  margin-top: 0;
+}

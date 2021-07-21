@@ -44,6 +44,7 @@ function authCheck() {
       user = users[index];
       if (user.logged_in) {
         logged_in = true;
+        whenDbIsReady();
         break;
       }
     }
@@ -180,3 +181,7 @@ class DB {
     }
   }
 }
+
+let whenDbIsReady = () => {
+  // empty function
+};

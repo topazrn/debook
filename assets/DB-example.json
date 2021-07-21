@@ -5,11 +5,9 @@
     "name": "Abah",
     "debts": [
       {
-        "yours": false,
         "amount": 239600,
         "description": "Beli kolam ikan",
-        "date": 1626788804949,
-        "due_date": 1636788804949
+        "date": "2021-07-08"
       }
     ]
   }

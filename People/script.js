@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
+whenDbIsReady = () => {
   renderPersons();
-});
+}
 
 function searchPerson() {
   let name = document.querySelector("#search-name").value.toLowerCase();
@@ -92,10 +92,6 @@ function addPerson() {
       alert(`Email must contain "@".`);
       return false;
     }
-    if (!email.endsWith(".com")) {
-      alert(`Email must ends with ".com".`);
-      return false;
-    }
 
     // Phone
     if (phone === "") {
@@ -115,14 +111,6 @@ function addPerson() {
 }
 
 function renderPersons() {
-  show(document.querySelector(".card h4"));
-  setTimeout(() => {
-    _renderPersons();
-    hide(document.querySelector(".card h4"));
-  }, 400);
-}
-
-function _renderPersons() {
   let personsContainer = document.querySelector(".card.people tbody");
   personsContainer.innerHTML = "";
   let templatePerson = document.querySelectorAll("template")[0].content.querySelector("tr");

@@ -123,6 +123,8 @@ td:last-child {
   background-color: #444ebd;
 }
 
+.card input[type=number],
+.card input[type=date],
 .card input[type=text],
 .card input[type=email],
 .card input[type=password] {

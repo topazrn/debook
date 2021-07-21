@@ -35,10 +35,6 @@ function validate(email, password, confirm_password, eula) {
       alert(`Email must contain "@".`);
       return false;
   }
-  if (!email.endsWith(".com")) {
-      alert(`Email must ends with ".com".`);
-      return false;
-  }
 
   // Password
   if (password === "") {
