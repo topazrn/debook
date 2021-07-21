@@ -4,24 +4,17 @@ function submits(event) {
   const fields = {};
   let fieldElements = [...document.querySelectorAll("form [name]")];
   fieldElements.forEach(input => {
-    if (input.getAttribute("name") === "eula") {
-      fields[input.getAttribute("name")] = input.checked;
-    } else {
-      fields[input.getAttribute("name")] = input.value.trim();
-    }
+    fields[input.getAttribute("name")] = input.value.trim();
   });
 
   let valid = validate(
     fields.email,
-    fields.password,
-    fields.confirm_password,
-    fields.eula
+    fields.password
   );
 
-  if (valid) addUser(
+  if (valid) login(
     fields.email,
     fields.password,
-    fields.eula
   );
 }
 
@@ -78,28 +71,20 @@ function validate(email, password, confirm_password, eula) {
     return false;
   }
 
-  // Confirm Password
-  if (password !== confirm_password) {
-    alert("Confirm Password does not match with Password.");
-    return false;
-  }
-
-  // Eula
-  if (!eula) {
-    alert("You must agree to the terms and conditions to be able to register.");
-    return false;
-  }
-
   return true;
 }
 
-function addUser(email, password, eula) {
-  db.insert("users", {
-    "id": `${email}:${password}`,
-    "logged_in": true,
-    "aggree_to_eula": eula,
-    "has_done_tutorial": false
-  }, () => {
-    window.location.href = getHomeUrl();
+function login(email, password) {
+  db.get("users", `${email}:${password}`, user => {
+    console.log(user);
+    console.log(user != undefined);
+    if (user != undefined) {
+      user.logged_in = true;
+      db.update("users", user.id, user, () => {
+        authCheck();
+      });
+    } else {
+      alert("Login or password invalid.")
+    }
   });
 }
