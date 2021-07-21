@@ -15,7 +15,7 @@ function hide(elem) {
 }
 
 function show(elem) {
-  elem.style.display = 'block';
+  elem.style.display = '';
 }
 
 function toRupiah(_int) {

@@ -1,6 +1,34 @@
 document.addEventListener('DOMContentLoaded', function () {
-    renderPersons();
+  renderPersons();
 });
+
+function searchPerson() {
+  let name = document.querySelector("#search-name").value.toLowerCase();
+  let email = document.querySelector("#search-email").value.toLowerCase();
+  let phone = document.querySelector("#search-phone").value.toLowerCase();
+  let rows = document.querySelectorAll("tbody>tr");
+  let matchIndex = [];
+
+  for (let index = 0; index < user.persons.length; index++) {
+    const person = user.persons[index];
+    if (
+      person.name.toLowerCase().indexOf(name) > -1 &&
+      person.email.toLowerCase().indexOf(email) > -1 &&
+      person.phone.toLowerCase().indexOf(phone) > -1
+    ) {
+      matchIndex.push(index);
+    }
+  }
+
+  for (let index = 0; index < rows.length; index++) {
+    const row = rows[index];
+    if (matchIndex.indexOf(index) > -1) {
+      show(row);
+    } else {
+      hide(row);
+    }
+  }
+}
 
 function deletePerson(email) {
   for (let index = 0; index < user.persons.length; index++) {
@@ -91,7 +119,7 @@ function renderPersons() {
   setTimeout(() => {
     _renderPersons();
     hide(document.querySelector(".card h4"));
-  }, 100);
+  }, 400);
 }
 
 function _renderPersons() {
