@@ -99,5 +99,7 @@ function addUser(email, password, eula) {
     "logged_in": true,
     "aggree_to_eula": eula,
     "has_done_tutorial": false
-  })
+  }, () => {
+    window.location.href = getHomeUrl();
+  });
 }

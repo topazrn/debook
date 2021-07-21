@@ -19,14 +19,15 @@
       <h3>Create an account</h3>
       <form onsubmit="submits(event)">
         <label for="email">Email</label><br>
-        <input type="email" name="email" id="email" ><br><br>
+        <input type="email" name="email" id="email" required><br><br>
         <label for="password">Password</label><br>
-        <input type="password" name="password" id="password" ><br><br>
+        <input type="password" name="password" id="password" required><br><br>
         <label for="confirm_password">Confirm Password</label><br>
-        <input type="password" name="confirm_password" id="confirm_password" ><br><br>
-        <input type="checkbox" name="eula" id="eula" >
+        <input type="password" name="confirm_password" id="confirm_password" required><br><br>
+        <input type="checkbox" name="eula" id="eula" required>
         <label for="eula">I agree to the terms and conditions.</label><br><br>
-        <button type="submit">Continue</button>
+        <button type="submit">Continue</button><br><br>
+        <span>Already have an account? <a href="../Login/index.html">Login</a></span>
       </form>
     </section>
   </main>

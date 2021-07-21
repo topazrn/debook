@@ -108,6 +108,33 @@ td:last-child {
   text-align: center;
 }
 
+.card button {
+  background-color: #5865F2;
+  border: none;
+  border-radius: 0.25rem;
+  color: white;
+  font-family: 'Comfortaa';
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.card button:hover {
+  background-color: #444ebd;
+}
+
+.card input[type=email], input[type=password] {
+  width: 100%;
+  padding: 0;
+  border: none;
+  font-family: 'Comfortaa';
+  height: 2rem;
+}
+
+.card input[type=checkbox] {
+  margin-left: 0;
+}
+
 @media (max-width: 992px) {
   body {
     flex-direction: column;

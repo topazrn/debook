@@ -1,16 +1,5 @@
-.card.database ul {
+.card ul {
   list-style: none;
   margin: 0;
   padding: 0;
-}
-
-.card.database button {
-  background-color: #5865F2;
-  border: none;
-  border-radius: 0.25rem;
-  color: white;
-  font-family: 'Comfortaa';
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  width: 100%;
 }

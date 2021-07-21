@@ -23,6 +23,65 @@ function getHomeUrl() {
   return `${window.location.protocol}//${window.location.host}`;
 }
 
+function getCurrentUrlWithoutQueryString() {
+  return `${getHomeUrl()}${window.location.pathname}`;
+}
+
+function authCheck() {
+  db.getAll("users", users => {
+    let logged_in = false;
+    for (let index = 0; index < users.length; index++) {
+      const user = users[index];
+      if (user.logged_in) {
+        logged_in = true;
+        break;
+      }
+    }
+    if (logged_in) {
+      if (!requiresLogin()) window.location.href = getHomeUrl();
+    } else {
+      if (requiresLogin()) window.location.href = getHomeUrl() + "/Login/index.html";
+    }
+  });
+
+  function requiresLogin() {
+    const pagesThatDoesNotRequireLogin = [
+      "register",
+      "login",
+    ];
+
+    let requiresLogin = true;
+    for (let index = 0; index < pagesThatDoesNotRequireLogin.length; index++) {
+      const page = pagesThatDoesNotRequireLogin[index];
+      requiresLogin = !getCurrentUrlWithoutQueryString().toLowerCase().startsWith(getHomeUrl() + "/" + page)
+      if (!requiresLogin) break;
+    }
+    return requiresLogin;
+  }
+}
+
+function logout() {
+  db.getAll("users", users => {
+    let logged_in = false;
+    let user;
+    for (let index = 0; index < users.length; index++) {
+      user = users[index];
+      if (user.logged_in) {
+        logged_in = true;
+        break;
+      }
+    }
+    if (logged_in) {
+      user.logged_in = false;
+      db.update("users", user.id, user, () => {
+        authCheck();
+      });
+    } else {
+      console.log(`%c You are not logged in to begin with!.`, consoleStyles.fail);
+    }
+  });
+}
+
 class DB {
   get(table, id, callback = console.log) {
     let transaction = this.db.transaction([table]);
@@ -74,10 +133,10 @@ class DB {
   }
 
   delete(table, id, callback) {
-    let request = db.transaction([table], "readwrite")
-    .objectStore(table)
-    .delete(id);
-    
+    let request = this.db.transaction([table], "readwrite")
+      .objectStore(table)
+      .delete(id);
+
     request.onsuccess = event => {
       console.log(`%c Delete data from table ${table} successful.`, consoleStyles.success);
       callback();
@@ -107,6 +166,7 @@ class DB {
       request.onsuccess = event => {
         this.db = request.result;
         console.log("%c Connected to IndexedDB: " + this.db, consoleStyles.success);
+        authCheck();
       };
 
       request.onerror = event => {
