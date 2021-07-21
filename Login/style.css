@@ -1,0 +1,29 @@
+main {
+  display: grid;
+  place-items: center;
+  background-image: url("../assets/discord-register-background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.card.register {
+  background-color: #36393F;
+}
+
+.card.register>h3 {
+  text-align: center;
+}
+
+input[type=email],
+input[type=password] {
+  min-width: 320px;
+}
+
+form a {
+  color: #00AFF4;
+}
+
+form a:hover {
+  text-decoration: underline;
+}
