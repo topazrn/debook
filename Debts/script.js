@@ -1,7 +1,87 @@
+let debtsDuplicate = [];
+
 whenDbIsReady = () => {
+  for (let personIndex = 0; personIndex < user.persons.length; personIndex++) {
+    const person = user.persons[personIndex];
+    for (let debtIndex = 0; debtIndex < person.debts.length; debtIndex++) {
+      const debt = person.debts[debtIndex];
+      debtsDuplicate.push({
+        id: `${personIndex}-${debtIndex}`,
+        name: person.name,
+        description: debt.description,
+        date: new Date(debt.date),
+        amount: debt.amount,
+      });
+    }
+  }
+  sortByName(document.getElementById("sort-name"));
   fillPeopleDatalist();
-  renderDebts();
 };
+
+let sortByNameAscending = false;
+let sortByDescriptionAscending = false;
+let sortByDateAscending = false;
+let sortByAmountAscending = false;
+
+function clearAllSorts() {
+  const sortables = document.querySelectorAll(".sortable");
+  sortables.forEach(sortable => {
+    sortable.classList.remove("sorted");
+    sortable.innerText = sortable.getAttribute("data-original-text");
+  });
+}
+
+function sortByName(th) {
+  clearAllSorts();
+
+  th.classList.add("sorted");
+  sortByNameAscending = !sortByNameAscending;
+  th.innerText = (sortByNameAscending ? "⇑" : "⇓") + " " + th.getAttribute("data-original-text");
+  debtsDuplicate.sort((a, b) => {
+    return (sortByNameAscending ? 1 : -1) * (a.name).localeCompare((b.name), 'en', { sensitivity: 'base' });
+  });
+
+  renderDebts();
+}
+
+function sortByDescription(th) {
+  clearAllSorts();
+
+  th.classList.add("sorted");
+  sortByDescriptionAscending = !sortByDescriptionAscending;
+  th.innerText = (sortByDescriptionAscending ? "⇑" : "⇓") + " " + th.getAttribute("data-original-text");
+  debtsDuplicate.sort((a, b) => {
+    return (sortByDescriptionAscending ? 1 : -1) * (a.description).localeCompare((b.description), 'en', { sensitivity: 'base' });
+  });
+
+  renderDebts();
+}
+
+function sortByDate(th) {
+  clearAllSorts();
+
+  th.classList.add("sorted");
+  sortByDateAscending = !sortByDateAscending;
+  th.innerText = (sortByDateAscending ? "⇑" : "⇓") + " " + th.getAttribute("data-original-text");
+  debtsDuplicate.sort((a, b) => {
+    return (sortByDateAscending ? 1 : -1) * (a.date > b.date ? 1 : -1);
+  });
+
+  renderDebts();
+}
+
+function sortByAmount(th) {
+  clearAllSorts();
+
+  th.classList.add("sorted");
+  sortByAmountAscending = !sortByAmountAscending;
+  th.innerText = (sortByAmountAscending ? "⇑" : "⇓") + " " + th.getAttribute("data-original-text");
+  debtsDuplicate.sort((a, b) => {
+    return (sortByAmountAscending ? 1 : -1) * (a.amount > b.amount ? 1 : -1);
+  });
+
+  renderDebts();
+}
 
 function fillPeopleDatalist() {
   let datalist = document.querySelector("#datalist-add-email");
@@ -166,25 +246,21 @@ function renderDebts() {
   let debtsContainer = document.querySelector(".card.debts tbody");
   debtsContainer.innerHTML = "";
   let templateDebt = document.querySelectorAll("template")[0].content.querySelector("tr");
-  let number = 0;
-  for (let personIndex = 0; personIndex < user.persons.length; personIndex++) {
-    const person = user.persons[personIndex];
-    for (let debtIndex = 0; debtIndex < person.debts.length; debtIndex++) {
-      const debt = person.debts[debtIndex];
-      let cloneTemplateDebt = document.importNode(templateDebt, true);
-      let tds = cloneTemplateDebt.querySelectorAll("td");
-      let no = tds[0];
-      let name = tds[1];
-      let description = tds[2];
-      let date = tds[3];
-      let amount = tds[4];
-      no.innerText = ++number;
-      cloneTemplateDebt.setAttribute("data-id", `${personIndex}-${debtIndex}`);
-      name.innerText = person.name;
-      description.innerText = debt.description;
-      date.innerText = (new Date(debt.date)).toLocaleDateString("ID-id");
-      amount.innerText = toRupiah(debt.amount);
-      debtsContainer.appendChild(cloneTemplateDebt);
-    }
+  for (let index = 0; index < debtsDuplicate.length; index++) {
+    const debt = debtsDuplicate[index];
+    let cloneTemplateDebt = document.importNode(templateDebt, true);
+    let tds = cloneTemplateDebt.querySelectorAll("td");
+    let no = tds[0];
+    let name = tds[1];
+    let description = tds[2];
+    let date = tds[3];
+    let amount = tds[4];
+    no.innerText = (index + 1);
+    cloneTemplateDebt.setAttribute("data-id", debt.id);
+    name.innerText = debt.name;
+    description.innerText = debt.description;
+    date.innerText = debt.date.toLocaleDateString("ID-id");
+    amount.innerText = toRupiah(debt.amount);
+    debtsContainer.appendChild(cloneTemplateDebt);
   }
 }
