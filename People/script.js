@@ -1,5 +1,5 @@
 whenDbIsReady = () => {
-  sortByName();
+  sortByName(document.getElementById("sort-name"));
   renderPersons();
 }
 
@@ -15,10 +15,9 @@ function clearAllSorts() {
   });
 }
 
-function sortByName() {
+function sortByName(th) {
   clearAllSorts();
 
-  const th = document.querySelector("#sort-name");
   th.classList.add("sorted");
   sortByNameAscending = !sortByNameAscending;
   th.innerText = (sortByNameAscending ? "⇑" : "⇓") + " " + th.getAttribute("data-original-text");
@@ -29,10 +28,9 @@ function sortByName() {
   renderPersons();
 }
 
-function sortByEmail() {
+function sortByEmail(th) {
   clearAllSorts();
 
-  const th = document.querySelector("#sort-email");
   th.classList.add("sorted");
   sortByEmailAscending = !sortByEmailAscending;
   th.innerText = (sortByEmailAscending ? "⇑" : "⇓") + " " + th.getAttribute("data-original-text");
@@ -43,10 +41,9 @@ function sortByEmail() {
   renderPersons();
 }
 
-function sortByPhone() {
+function sortByPhone(th) {
   clearAllSorts();
 
-  const th = document.querySelector("#sort-phone");
   th.classList.add("sorted");
   sortByPhoneAscending = !sortByPhoneAscending;
   th.innerText = (sortByPhoneAscending ? "⇑" : "⇓") + " " + th.getAttribute("data-original-text");
