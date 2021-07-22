@@ -45,6 +45,11 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 }
 
+.card-container>.card {
+  margin-top: 0;
+}
+
+
 .card-container>.card.debts {
   margin-right: 0.5rem;
 }
