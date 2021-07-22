@@ -75,9 +75,7 @@ function validate(email, password, confirm_password, eula) {
 }
 
 function login(email, password) {
-  db.get("users", `${email}:${password}`, user => {
-    console.log(user);
-    console.log(user != undefined);
+  db.get(`${email}:${password}`, user => {
     if (user != undefined) {
       user.logged_in = true;
       db.update(user.id, user, () => {

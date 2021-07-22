@@ -238,7 +238,6 @@ function addDebt() {
       return false;
     }
     if (date.length !== 10) {
-      console.log(date.length);
       alert("Date must match with yyyy-mm-dd format.");
       return false;
     }
