@@ -75,7 +75,6 @@ function renderHistory() {
     }
     return 0;
   });
-  let number = 0;
   for (let index = 0; index < debts.length && index < 10; index++) {
     const debt = debts[index];
     let cloneTemplateDebt = document.importNode(templateDebt, true);
@@ -85,7 +84,7 @@ function renderHistory() {
     let description = tds[2];
     let date = tds[3];
     let amount = tds[4];
-    no.innerText = ++number;
+    no.innerText = (index + 1);
     name.innerText = debt.name;
     description.innerText = debt.description;
     date.innerText = debt.date.toLocaleDateString("ID-id");

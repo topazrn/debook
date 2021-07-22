@@ -1,4 +1,59 @@
 whenDbIsReady = () => {
+  sortByName();
+  renderPersons();
+}
+
+let sortByNameAscending = false;
+let sortByEmailAscending = false;
+let sortByPhoneAscending = false;
+
+function clearAllSorts() {
+  const sortables = document.querySelectorAll(".sortable");
+  sortables.forEach(sortable => {
+    sortable.classList.remove("sorted");
+    sortable.innerText = sortable.getAttribute("data-original-text");
+  });
+}
+
+function sortByName() {
+  clearAllSorts();
+
+  const th = document.querySelector("#sort-name");
+  th.classList.add("sorted");
+  sortByNameAscending = !sortByNameAscending;
+  th.innerText = (sortByNameAscending ? "⇑" : "⇓") + " " + th.getAttribute("data-original-text");
+  user.persons.sort((a, b) => {
+    return (sortByNameAscending ? 1 : -1) * (a.name).localeCompare((b.name), 'en', { sensitivity: 'base' });
+  });
+
+  renderPersons();
+}
+
+function sortByEmail() {
+  clearAllSorts();
+
+  const th = document.querySelector("#sort-email");
+  th.classList.add("sorted");
+  sortByEmailAscending = !sortByEmailAscending;
+  th.innerText = (sortByEmailAscending ? "⇑" : "⇓") + " " + th.getAttribute("data-original-text");
+  user.persons.sort((a, b) => {
+    return (sortByEmailAscending ? 1 : -1) * (a.email).localeCompare((b.email), 'en', { sensitivity: 'base' });
+  });
+
+  renderPersons();
+}
+
+function sortByPhone() {
+  clearAllSorts();
+
+  const th = document.querySelector("#sort-phone");
+  th.classList.add("sorted");
+  sortByPhoneAscending = !sortByPhoneAscending;
+  th.innerText = (sortByPhoneAscending ? "⇑" : "⇓") + " " + th.getAttribute("data-original-text");
+  user.persons.sort((a, b) => {
+    return (sortByPhoneAscending ? 1 : -1) * (a.phone).localeCompare((b.phone), 'en', { sensitivity: 'base' });
+  });
+
   renderPersons();
 }
 
@@ -30,17 +85,12 @@ function searchPerson() {
   }
 }
 
-function deletePerson(email) {
-  for (let index = 0; index < user.persons.length; index++) {
-    const person = user.persons[index];
-    if (person.email === email) {
-      user.persons.splice(index, 1);
-      db.update(user.id, user, () => {
-        renderPersons();
-      });
-      break;
-    }
-  }
+function deletePerson(deleteButton) {
+  let personIndex = parseInt(deleteButton.closest("tr").getAttribute("data-id"));
+  user.persons.splice(personIndex, 1);
+  db.update(user.id, user, () => {
+    renderPersons();
+  });
 }
 
 function addPerson() {
@@ -114,22 +164,19 @@ function renderPersons() {
   let personsContainer = document.querySelector(".card.people tbody");
   personsContainer.innerHTML = "";
   let templatePerson = document.querySelectorAll("template")[0].content.querySelector("tr");
-  let number = 0;
-  user.persons.forEach(person => {
+  for (let index = 0; index < user.persons.length; index++) {
+    const person = user.persons[index];
     let cloneTemplatePerson = document.importNode(templatePerson, true);
     let tds = cloneTemplatePerson.querySelectorAll("td");
     let no = tds[0];
     let name = tds[1];
     let email = tds[2];
     let phone = tds[3];
-    let deleteButton = tds[4].querySelectorAll("button")[0];
-    no.innerText = ++number;
+    cloneTemplatePerson.setAttribute("data-id", index);
+    no.innerText = (index + 1);
     name.innerText = person.name;
     email.innerText = person.email;
     phone.innerText = person.phone;
-    deleteButton.onclick = () => {
-      deletePerson(person.email);
-    };
     personsContainer.appendChild(cloneTemplatePerson);
-  });
+  }
 }

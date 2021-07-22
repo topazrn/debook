@@ -12,3 +12,17 @@
 .card button {
   margin-top: 0;
 }
+
+th:last-child,
+td:last-child {
+  padding-right: 0;
+  text-align: center;
+}
+
+th.sortable:hover, th.sortable.sorted:hover {
+  background-color: #202225;
+}
+
+th.sortable.sorted {
+  background-color: #191a1d;
+}
