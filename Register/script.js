@@ -178,16 +178,18 @@ function addUser(
   password,
   eula
 ) {
-  db.insert({
-    "id": `${email}:${password}`,
-    "name": name,
-    "address": address,
-    "dob": dob,
-    "phone": phone,
-    "logged_in": true,
-    "aggreed_to_eula": eula,
-    "persons": [],
-  }, () => {
-    window.location.href = getHomeUrl();
+  db.getExampleData(seed => {
+    db.insert({
+      "id": `${email}:${password}`,
+      "name": name,
+      "address": address,
+      "dob": dob,
+      "phone": phone,
+      "logged_in": true,
+      "aggreed_to_eula": eula,
+      "persons": seed,
+    }, () => {
+      window.location.href = getHomeUrl();
+    });
   });
 }
