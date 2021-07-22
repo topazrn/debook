@@ -185,8 +185,7 @@ function addUser(
     "dob": dob,
     "phone": phone,
     "logged_in": true,
-    "aggree_to_eula": eula,
-    "has_done_tutorial": false,
+    "aggreed_to_eula": eula,
     "persons": [],
   }, () => {
     window.location.href = getHomeUrl();
