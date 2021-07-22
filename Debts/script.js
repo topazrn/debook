@@ -1,6 +1,12 @@
 let debtsDuplicate = [];
 
 whenDbIsReady = () => {
+  generateDebtsDuplicate()
+  sortByName(document.getElementById("sort-name"));
+};
+
+function generateDebtsDuplicate() {
+  debtsDuplicate = [];
   for (let personIndex = 0; personIndex < user.persons.length; personIndex++) {
     const person = user.persons[personIndex];
     for (let debtIndex = 0; debtIndex < person.debts.length; debtIndex++) {
@@ -14,9 +20,7 @@ whenDbIsReady = () => {
       });
     }
   }
-  sortByName(document.getElementById("sort-name"));
-  fillPeopleDatalist();
-};
+}
 
 let sortByNameAscending = false;
 let sortByDescriptionAscending = false;
@@ -131,6 +135,7 @@ function deleteDebt(deleteButton) {
   const debtIndex = indexes[1];
   user.persons[personIndex].debts.splice(debtIndex, 1);
   db.update(user.id, user, () => {
+    generateDebtsDuplicate();
     renderDebts();
   });
 }
@@ -165,6 +170,7 @@ function addDebt() {
       description.value = "";
       date.value = "";
       amount.value = "";
+      generateDebtsDuplicate();
       renderDebts();
     });
   };
