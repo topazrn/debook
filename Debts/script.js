@@ -22,6 +22,30 @@ function generateDebtsDuplicate() {
   }
 }
 
+function reSort() {
+  switch (lastSortBy) {
+    case "Name":
+      sortByNameAscending = !sortByNameAscending;
+      sortByName(document.getElementById("sort-name"));
+      break;
+    case "Description":
+      sortByDescriptionAscending = !sortByDescriptionAscending;
+      sortByDescription(document.getElementById("sort-description"));
+      break;
+    case "Date":
+      sortByDateAscending = !sortByDateAscending;
+      sortByDate(document.getElementById("sort-date"));
+      break;
+    case "Amount":
+      sortByAmountAscending = !sortByAmountAscending;
+      sortByAmount(document.getElementById("sort-amount"));
+      break;
+    default:
+      break;
+  }
+}
+
+let lastSortBy = "Name";
 let sortByNameAscending = false;
 let sortByDescriptionAscending = false;
 let sortByDateAscending = false;
@@ -37,6 +61,7 @@ function clearAllSorts() {
 
 function sortByName(th) {
   clearAllSorts();
+  lastSortBy = "Name";
 
   th.classList.add("sorted");
   sortByNameAscending = !sortByNameAscending;
@@ -50,6 +75,7 @@ function sortByName(th) {
 
 function sortByDescription(th) {
   clearAllSorts();
+  lastSortBy = "Description";
 
   th.classList.add("sorted");
   sortByDescriptionAscending = !sortByDescriptionAscending;
@@ -63,6 +89,7 @@ function sortByDescription(th) {
 
 function sortByDate(th) {
   clearAllSorts();
+  lastSortBy = "Date";
 
   th.classList.add("sorted");
   sortByDateAscending = !sortByDateAscending;
@@ -76,6 +103,7 @@ function sortByDate(th) {
 
 function sortByAmount(th) {
   clearAllSorts();
+  lastSortBy = "Amount";
 
   th.classList.add("sorted");
   sortByAmountAscending = !sortByAmountAscending;
@@ -136,7 +164,7 @@ function deleteDebt(deleteButton) {
   user.persons[personIndex].debts.splice(debtIndex, 1);
   db.update(user.id, user, () => {
     generateDebtsDuplicate();
-    renderDebts();
+    reSort();
   });
 }
 
@@ -171,7 +199,7 @@ function addDebt() {
       date.value = "";
       amount.value = "";
       generateDebtsDuplicate();
-      renderDebts();
+      reSort();
     });
   };
 

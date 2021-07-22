@@ -2,9 +2,29 @@ whenDbIsReady = () => {
   sortByName(document.getElementById("sort-name"));
 }
 
+let lastSortBy = "Name";
 let sortByNameAscending = false;
 let sortByEmailAscending = false;
 let sortByPhoneAscending = false;
+
+function reSort() {
+  switch (lastSortBy) {
+    case "Name":
+      sortByNameAscending = !sortByNameAscending;
+      sortByName(document.getElementById("sort-name"));
+      break;
+    case "Email":
+      sortByEmailAscending = !sortByEmailAscending;
+      sortByEmail(document.getElementById("sort-email"));
+      break;
+    case "Phone":
+      sortByPhoneAscending = !sortByPhoneAscending;
+      sortByPhone(document.getElementById("sort-phone"));
+      break;
+    default:
+      break;
+  }
+}
 
 function clearAllSorts() {
   const sortables = document.querySelectorAll(".sortable");
@@ -16,6 +36,7 @@ function clearAllSorts() {
 
 function sortByName(th) {
   clearAllSorts();
+  lastSortBy = "Name";
 
   th.classList.add("sorted");
   sortByNameAscending = !sortByNameAscending;
@@ -29,6 +50,7 @@ function sortByName(th) {
 
 function sortByEmail(th) {
   clearAllSorts();
+  lastSortBy = "Email";
 
   th.classList.add("sorted");
   sortByEmailAscending = !sortByEmailAscending;
@@ -42,6 +64,7 @@ function sortByEmail(th) {
 
 function sortByPhone(th) {
   clearAllSorts();
+  lastSortBy = "Phone";
 
   th.classList.add("sorted");
   sortByPhoneAscending = !sortByPhoneAscending;
@@ -85,7 +108,7 @@ function deletePerson(deleteButton) {
   let personIndex = parseInt(deleteButton.closest("tr").getAttribute("data-id"));
   user.persons.splice(personIndex, 1);
   db.update(user.id, user, () => {
-    renderPersons();
+    reSort();
   });
 }
 
@@ -111,7 +134,7 @@ function addPerson() {
       email.value = "";
       phone.value = "";
       name.value = "";
-      renderPersons();
+      reSort();
     });
   };
 
