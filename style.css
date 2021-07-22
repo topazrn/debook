@@ -39,3 +39,31 @@
 .summary-item .progress-percentage {
   font-size: 1.5rem;
 }
+
+.card-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.card-container>.card.debts {
+  margin-right: 0.5rem;
+}
+
+.card-container>.card.extremes {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 992px) {
+  .card-container {
+    display: unset;
+    grid-template-columns: unset;
+  }
+  
+  .card-container>.card.debts {
+    margin-right: 1rem;
+  }
+  
+  .card-container>.card.extremes {
+    margin-left: 1rem;
+  }
+}

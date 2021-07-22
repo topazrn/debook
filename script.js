@@ -1,6 +1,7 @@
 whenDbIsReady = () => {
   renderSummary();
   renderHistory();
+  renderExtremes();
 };
 
 function renderSummary() {
@@ -32,7 +33,7 @@ function renderSummary() {
   });
   const amountOfBalance = amountOfOthers - amountOfYours;
 
-  amountTextOfOthers.innerText += " " + toRupiah(amountOfOthers); 
+  amountTextOfOthers.innerText += " " + toRupiah(amountOfOthers);
   amountTextOfYours.innerText += " " + toRupiah(amountOfYours);
   amountTextOfBalance.innerText += " " + toRupiah(amountOfBalance);
 
@@ -43,11 +44,11 @@ function renderSummary() {
   percentageTextOfOthers.innerText = percentageOfOthers;
   percentageTextOfYours.innerText = percentageOfYours;
   percentageTextOfBalance.innerText = percentageOfBalance;
-  
+
   percentageBarOfOthers.style.width = percentageOfOthers;
   percentageBarOfYours.style.width = percentageOfYours;
   percentageBarOfBalance.style.width = percentageOfBalance;
-  
+
   if (amountOfBalance < 0) {
     percentageBarOfBalance.style.backgroundColor = "#ED4245"
     percentageBarOfBalance.style.width = `${Math.abs(Math.round((amountOfBalance / (amountOfOthers + amountOfYours)) * 100) || 0)}%`;
@@ -95,5 +96,62 @@ function renderHistory() {
     date.innerText = debt.date.toLocaleDateString("ID-id");
     amount.innerText = toRupiah(debt.amount);
     debtsContainer.appendChild(cloneTemplateDebt);
+  }
+}
+
+function renderExtremes() {
+  let debtsContainer = document.querySelector(".card.extremes tbody");
+  debtsContainer.innerHTML = "";
+  let templateDebt = document.querySelectorAll("template")[0].content.querySelector("tr");
+  let debts = [];
+  for (let personIndex = 0; personIndex < user.persons.length; personIndex++) {
+    const person = user.persons[personIndex];
+    for (let debtIndex = 0; debtIndex < person.debts.length; debtIndex++) {
+      const debt = person.debts[debtIndex];
+      debts.push({
+        name: person.name,
+        description: debt.description,
+        date: new Date(debt.date),
+        amount: debt.amount,
+      })
+    }
+  }
+  debts.sort((a, b) => {
+    if (a.amount > b.amount) {
+      return -1;
+    }
+    if (b.amount > a.amount) {
+      return 1;
+    }
+    return 0;
+  });
+  for (let index = 0; index < debts.length; index++) {
+    const debt = debts[index];
+    let cloneTemplateDebt = document.importNode(templateDebt, true);
+    let tds = cloneTemplateDebt.querySelectorAll("td");
+    let no = tds[0];
+    let name = tds[1];
+    let description = tds[2];
+    let date = tds[3];
+    let amount = tds[4];
+    no.innerText = (index + 1);
+    name.innerText = debt.name;
+    description.innerText = debt.description;
+    date.innerText = debt.date.toLocaleDateString("ID-id");
+    amount.innerText = toRupiah(debt.amount);
+    debtsContainer.appendChild(cloneTemplateDebt);
+    if (debts.length > 10) {
+      if (index === 3) {
+        for (let dotRows = 0; dotRows < 2; dotRows++) {
+          let cloneTemplateDebt = document.importNode(templateDebt, true);
+          let tds = cloneTemplateDebt.querySelectorAll("td");
+          tds.forEach(td => {
+            td.innerText = ":";
+          });
+          debtsContainer.appendChild(cloneTemplateDebt);
+        }
+        index = debts.length - 5;
+      }
+    }
   }
 }
