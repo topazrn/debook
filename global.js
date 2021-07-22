@@ -129,13 +129,13 @@ class DB {
     }
   }
 
-  update(id, data, callback) {
+  update(id, data, callback = console.log) {
     this.delete(id, () => {
       this.insert(data, callback);
     });
   }
 
-  delete(id, callback) {
+  delete(id, callback = console.log) {
     let request = this.db.transaction([this.table], "readwrite")
       .objectStore(this.table)
       .delete(id);
@@ -146,16 +146,13 @@ class DB {
     };
   }
 
-  import(data) {
-    data.forEach(row => {
-      this.db.transaction([this.table], "readwrite")
-        .objectStore(this.table)
-        .add(row)
-    });
+  import(data, callback = console.log) {
+    user.persons = data;
+    this.update(user.id, user, callback);
   }
 
-  getExampleData(callback) {
-    fetch(`${getHomeUrl()}/assets/DB-example.json`)
+  getExampleData(callback = console.log) {
+    fetch(`${getHomeUrl()}/assets/data-example.json`)
       .then(response => response.json())
       .then(data => callback(data));
   }

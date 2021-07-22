@@ -117,6 +117,7 @@ function sortByAmount(th) {
 
 function fillPeopleDatalist() {
   let datalist = document.querySelector("#datalist-add-email");
+  datalist.innerHTML = "";
   user.persons.forEach(person => {
     let option = document.createElement("option");
     option.value = person.email;
