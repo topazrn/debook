@@ -18,12 +18,20 @@
     <section class="card register">
       <h3>Create an account</h3>
       <form onsubmit="submits(event)">
+        <label for="name">Name</label><br>
+        <input type="text" name="name" id="name" required><br><br>
+        <label for="address">Address</label><br>
+        <textarea name="address" id="address" cols="30" rows="3" required></textarea><br><br>
+        <label for="dob">Date of Birth</label><br>
+        <input type="date" name="dob" id="dob" required><br><br>
+        <label for="phone">Phone</label><br>
+        <input type="tel" name="phone" id="phone" required><br><br>
         <label for="email">Email</label><br>
         <input type="email" name="email" id="email" required><br><br>
         <label for="password">Password</label><br>
-        <input type="password" name="password" id="password" required><br><br>
+        <input type="password" name="password" id="password" minlength="8" maxlength="10" required><br><br>
         <label for="confirm_password">Confirm Password</label><br>
-        <input type="password" name="confirm_password" id="confirm_password" required><br><br>
+        <input type="password" name="confirm_password" id="confirm_password" minlength="8" maxlength="10" required><br><br>
         <input type="checkbox" name="eula" id="eula" required>
         <label for="eula">I agree to the terms and conditions.</label><br><br>
         <button type="submit">Continue</button><br><br>

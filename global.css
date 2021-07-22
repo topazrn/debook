@@ -132,16 +132,23 @@ th.sortable.sorted {
   background-color: #444ebd;
 }
 
+.card input[type=tel],
 .card input[type=number],
 .card input[type=date],
 .card input[type=text],
 .card input[type=email],
-.card input[type=password] {
+.card input[type=password],
+.card textarea {
   width: 100%;
   padding: 0;
   border: none;
   font-family: 'Comfortaa';
   height: 2rem;
+}
+
+.card textarea {
+  height: unset;
+  resize: vertical;
 }
 
 .card input[type=checkbox] {

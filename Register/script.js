@@ -7,11 +7,15 @@ function submits(event) {
     if (input.getAttribute("name") === "eula") {
       fields[input.getAttribute("name")] = input.checked;
     } else {
-      fields[input.getAttribute("name")] = input.value.trim();
+      fields[input.getAttribute("name")] = input.value;
     }
   });
 
   let valid = validate(
+    fields.name,
+    fields.address,
+    fields.dob,
+    fields.phone,
     fields.email,
     fields.password,
     fields.confirm_password,
@@ -19,21 +23,89 @@ function submits(event) {
   );
 
   if (valid) addUser(
+    fields.name,
+    fields.address,
+    fields.dob,
+    fields.phone,
     fields.email,
     fields.password,
     fields.eula
   );
 }
 
-function validate(email, password, confirm_password, eula) {
+function validate(
+  name,
+  address,
+  dob,
+  phone,
+  email,
+  password,
+  confirm_password,
+  eula
+) {
+  // Name
+  if (name === "") {
+    alert("Name must be filled.");
+    return false;
+  }
+  for (let index = 0; index < name.length; index++) {
+    const character = name[index];
+    if (!isLetter(character)) {
+      alert("Full Name must be letter only.");
+      return false;
+    }
+  }
+
+  // Address
+  if (address === "") {
+    alert("Address must be filled.");
+    return false;
+  }
+
+  // Date of birth
+  if (dob === "") {
+    alert("Date of birth must be filled.");
+    return false;
+  }
+  if (dob.length !== 10) {
+    alert("Date of birth must match with yyyy-mm-dd format.");
+    return false;
+  }
+  let accordingToFormat = true;
+  for (let index = 0; index < dob.length; index++) {
+    const character = dob[index];
+    if (index === 4 || index == 7) {
+      accordingToFormat = (character === "-");
+    } else {
+      accordingToFormat = isNumber(character);
+    }
+  }
+  if (!accordingToFormat) {
+    alert("Date of birth must match with yyyy-mm-dd format.");
+    return false;
+  }
+
+  // Phone
+  if (phone === "") {
+    alert("Phone must be filled.");
+    return false;
+  }
+  for (let index = 0; index < phone.length; index++) {
+    const character = phone[index];
+    if (!isNumber(character)) {
+      alert("Phone must be number only.");
+      return false;
+    }
+  }
+
   // Email
   if (email === "") {
     alert("Email must be filled.");
     return false;
   }
   if (email.indexOf("@") == -1) {
-      alert(`Email must contain "@".`);
-      return false;
+    alert(`Email must contain "@".`);
+    return false;
   }
 
   // Password
@@ -97,9 +169,21 @@ function validate(email, password, confirm_password, eula) {
   return true;
 }
 
-function addUser(email, password, eula) {
-  db.insert("users", {
+function addUser(
+  name,
+  address,
+  dob,
+  phone,
+  email,
+  password,
+  eula
+) {
+  db.insert({
     "id": `${email}:${password}`,
+    "name": name,
+    "address": address,
+    "dob": dob,
+    "phone": phone,
     "logged_in": true,
     "aggree_to_eula": eula,
     "has_done_tutorial": false,

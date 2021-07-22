@@ -36,9 +36,9 @@ function renderSummary() {
   amountTextOfYours.innerText += " " + toRupiah(amountOfYours);
   amountTextOfBalance.innerText += " " + toRupiah(amountOfBalance);
 
-  const percentageOfOthers = `${Math.round((amountOfOthers / (amountOfOthers + amountOfYours)) * 100)}%`;
-  const percentageOfYours = `${Math.round((amountOfYours / (amountOfOthers + amountOfYours)) * 100)}%`;
-  const percentageOfBalance = `${Math.round((amountOfBalance / (amountOfOthers + amountOfYours)) * 100)}%`;
+  const percentageOfOthers = `${(Math.round((amountOfOthers / (amountOfOthers + amountOfYours)) * 100) || 0)}%`;
+  const percentageOfYours = `${(Math.round((amountOfYours / (amountOfOthers + amountOfYours)) * 100) || 0)}%`;
+  const percentageOfBalance = `${(Math.round((amountOfBalance / (amountOfOthers + amountOfYours)) * 100) || 0)}%`;
 
   percentageTextOfOthers.innerText = percentageOfOthers;
   percentageTextOfYours.innerText = percentageOfYours;

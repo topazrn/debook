@@ -148,8 +148,8 @@ class DB {
 
   import(data) {
     data.forEach(row => {
-      this.db.transaction(["users"], "readwrite")
-        .objectStore("users")
+      this.db.transaction([this.table], "readwrite")
+        .objectStore(this.table)
         .add(row)
     });
   }
