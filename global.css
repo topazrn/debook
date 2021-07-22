@@ -85,6 +85,15 @@ td:last-child {
   color: white;
 }
 
+th.sortable:hover,
+th.sortable.sorted:hover {
+  background-color: #202225;
+}
+
+th.sortable.sorted {
+  background-color: #191a1d;
+}
+
 .table {
   overflow-x: auto;
 }
