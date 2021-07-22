@@ -45,7 +45,10 @@ function searchDebt() {
   }
 }
 
-function deleteDebt(personIndex, debtIndex) {
+function deleteDebt(deleteButton) {
+  const indexes = deleteButton.closest("tr").getAttribute("data-id").split("-");
+  const personIndex = indexes[0];
+  const debtIndex = indexes[1];
   user.persons[personIndex].debts.splice(debtIndex, 1);
   db.update(user.id, user, () => {
     renderDebts();
@@ -175,16 +178,12 @@ function renderDebts() {
       let description = tds[2];
       let date = tds[3];
       let amount = tds[4];
-      let deleteButton = tds[5].querySelectorAll("button")[0];
       no.innerText = ++number;
       cloneTemplateDebt.setAttribute("data-id", `${personIndex}-${debtIndex}`);
       name.innerText = person.name;
       description.innerText = debt.description;
       date.innerText = (new Date(debt.date)).toLocaleDateString("ID-id");
       amount.innerText = toRupiah(debt.amount);
-      deleteButton.onclick = () => {
-        deleteDebt(personIndex, debtIndex);
-      };
       debtsContainer.appendChild(cloneTemplateDebt);
     }
   }
