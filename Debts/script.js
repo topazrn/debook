@@ -2,7 +2,7 @@ let debtsDuplicate = [];
 
 whenDbIsReady = () => {
   generateDebtsDuplicate()
-  sortByName(document.getElementById("sort-name"));
+  sortByDate(document.getElementById("sort-date"));
 };
 
 function generateDebtsDuplicate() {
@@ -45,10 +45,10 @@ function reSort() {
   }
 }
 
-let lastSortBy = "Name";
+let lastSortBy = "Date";
 let sortByNameAscending = false;
 let sortByDescriptionAscending = false;
-let sortByDateAscending = false;
+let sortByDateAscending = true;
 let sortByAmountAscending = false;
 
 function clearAllSorts() {
