@@ -1,6 +1,5 @@
 whenDbIsReady = () => {
   sortByName(document.getElementById("sort-name"));
-  renderPersons();
 }
 
 let sortByNameAscending = false;
