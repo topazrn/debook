@@ -47,6 +47,11 @@ function renderSummary() {
   percentageBarOfOthers.style.width = percentageOfOthers;
   percentageBarOfYours.style.width = percentageOfYours;
   percentageBarOfBalance.style.width = percentageOfBalance;
+  
+  if (amountOfBalance < 0) {
+    percentageBarOfBalance.style.backgroundColor = "#ED4245"
+    percentageBarOfBalance.style.width = `${Math.abs(Math.round((amountOfBalance / (amountOfOthers + amountOfYours)) * 100) || 0)}%`;
+  }
 }
 
 function renderHistory() {
