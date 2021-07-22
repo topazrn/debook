@@ -24,13 +24,14 @@
     </ul>
   </nav>
   <main>
-    <section class="card database">
-      <h3>Manage Database</h3>
+    <section class="card data">
+      <h3>Manage Data</h3>
       <ul>
-        <li><button>Download database backup</button></li>
-        <li><button>Restore database backup</button></li>
-        <li><button>Fill database with example data</button></li>
-        <li><button>Clear database</button></li>
+        <li><button onclick="backupData()">Backup data</button></li>
+        <li><input type="file" accept="application/JSON" name="file" id="file"></li>
+        <li><button onclick="restoreData()">Restore data</button></li>
+        <li><button onclick="seedData()">Use example data</button></li>
+        <li><button onclick="clearData()">Clear data</button></li>
       </ul>
     </section>
     <section class="card account">
@@ -41,6 +42,7 @@
     </section>
   </main>
   <script src="../global.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>

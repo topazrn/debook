@@ -72,19 +72,6 @@ function authCheck() {
   }
 }
 
-function logout() {
-  db.getAll(users => {
-    if (user.logged_in) {
-      user.logged_in = false;
-      db.update(user.id, user, () => {
-        authCheck();
-      });
-    } else {
-      console.log(`%c You are not logged in to begin with!.`, consoleStyles.fail);
-    }
-  });
-}
-
 class DB {
   get(id, callback = console.log) {
     let transaction = this.db.transaction([this.table]);
@@ -144,11 +131,6 @@ class DB {
       console.log(`%c Delete data from table ${this.table} successful.`, consoleStyles.success);
       callback();
     };
-  }
-
-  import(data, callback = console.log) {
-    user.persons = data;
-    this.update(user.id, user, callback);
   }
 
   getExampleData(callback = console.log) {

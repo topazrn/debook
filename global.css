@@ -132,6 +132,7 @@ th.sortable.sorted {
   background-color: #444ebd;
 }
 
+.card input[type=file],
 .card input[type=tel],
 .card input[type=number],
 .card input[type=date],
@@ -144,6 +145,8 @@ th.sortable.sorted {
   border: none;
   font-family: 'Comfortaa';
   height: 2rem;
+  background-color: white;
+  border-radius: 0.25rem;
 }
 
 .card textarea {
